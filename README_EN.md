@@ -4,7 +4,7 @@ An interactive web application based on streamlit that supports various language
 ## 0. Objective
 
 - [x] Support the Chat Completions API page for text conversations
-- [ ] Support the Vision page for image understanding
+- [x] Support the Vision page for image understanding
 
 Other added features
 
@@ -27,11 +27,9 @@ streamlit run chat.py --server.port 1234
 ## 3. Screenshots
 The following screenshots may not be the latest. You can see the latest examples [here]().
 
-Open dialogue model:
+
 ![1](./file/1.gif)
 
-Local thousand-word model:
-![2](./file/2.gif)
 
 ## 4. Configuration File
 

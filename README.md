@@ -26,11 +26,8 @@ streamlit run ./src/chat.py --server.port 1234
 ## 3. 效果图
 下列效果图估计不是最新，最新的示例可以看[这里](https://chat-openai-app-hyvc8yrrwciw24dyizzx73.streamlit.app/)
 
-open对话模型：
 ![1](./file/1.gif)
 
-本地千文模型：
-![2](./file/2.gif)
 
 ## 4. 配置文件
 
