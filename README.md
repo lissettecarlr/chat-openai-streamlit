@@ -4,7 +4,7 @@
 ## 0. 目标
 
 - [x] 支持Chat Completions API 的页面，进行文本对话
-- [ ] 支持Vision 的页面，进行图像理解
+- [x] 支持Vision的页面，进行图像理解
 
 其他添加的小功能
 
@@ -20,8 +20,7 @@ pip install -r requirements.txt
 ## 2. 运行
 
 ```bash
-cd src
-streamlit run chat.py --server.port 1234
+streamlit run ./src/chat.py --server.port 1234
 ```
 
 ## 3. 效果图
