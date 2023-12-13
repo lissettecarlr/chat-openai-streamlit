@@ -3,18 +3,23 @@ import streamlit as st
 import yaml
 import time
 import tiktoken
+import os,sys
 
 st.title("Chat Completions")
 st.caption("Please fill in the parameters in the sidebar before using, or import the parameters by uploading a file.")
 
+# 初始化session_state
+if 'base_url' not in st.session_state:
+    st.session_state['base_url'] = "https://api.openai.com/v1"
+if 'api_key' not in st.session_state:
+    st.session_state['api_key'] = ""
+
+
 # 加载默认配置文件
-with open('./config/default.yaml', 'r') as f:
+src_path = os.path.dirname(os.path.realpath(sys.argv[0]))
+with open(os.path.join(src_path, 'config/default.yaml'), 'r') as f:
     config_defalut = yaml.safe_load(f)
 
-def get_session_value(key, default_value):
-    if st.session_state.get(key) is None:
-        st.session_state[key] = default_value
-    return st.session_state[key]
 
 @st.cache_resource
 def get_openai_client(url, api_key):
@@ -36,7 +41,6 @@ def import_config_file(file):
             st.session_state.base_url= config['base_url']
         if 'api_key' in config:
             st.session_state.api_key = config['api_key']
-
 
 def num_tokens_from_messages(messages, model="gpt-3.5-turbo-0613"):
     """
@@ -84,25 +88,22 @@ uploaded_file = st.sidebar.file_uploader("uploaded config", type="yaml")
 # 如果文件上传成功，则调用import_config_file函数
 if uploaded_file is not None:
     import_config_file(uploaded_file)
-
-# 在主界面显示导入的配置字段
-# st.write(st.session_state)
+    #print(st.session_state)
 
 ## 侧边栏
-base_url = st.sidebar.text_input('Base URL', get_session_value('base_url', 'https://api.openai.com/v1'), key='base_url')
-api_key = st.sidebar.text_input('API Key',get_session_value('api_key',""), type='password', key='api_key')
+base_url = st.sidebar.text_input('Base URL', st.session_state.base_url, key='base_url')
+api_key = st.sidebar.text_input('API Key',"", type='password', key='api_key')
 
 # 模型列表
 st.session_state['model_list'] = config_defalut["completions"]["models"]
-
 model_name = st.selectbox('Models', st.session_state.model_list, key='chat_model_name')
-system_prompt = st.text_input('System Prompt', get_session_value('system_prompt', 'You are a hellpful assistant.'), key='system_prompt')
+system_prompt = st.text_input('System Prompt (Please click the button "clear history" after modification.)' ,config_defalut["completions"]["system_prompt"], key='system_prompt')
 
 if not st.checkbox('default param',True):
     max_tokens = st.number_input('Max Tokens', 1, 200000, 512, key='max_tokens')
     temperature = st.slider('Temperature', 0.0, 1.0,  0.7, key='temperature')
     top_p = st.slider('Top P', 0.0, 1.0, 1.0, key='top_p')
-    stream = st.checkbox('Stream', get_session_value('stream', True), key='stream')
+    stream = st.checkbox('Stream', True, key='stream')
 else:
     max_tokens = config_defalut["completions"]["max_tokens"]
     temperature = config_defalut["completions"]["temperature"]
@@ -184,9 +185,12 @@ if prompt := st.chat_input():
                
                 # 计算当前对话的消耗的token数
                 if config_defalut["completions"]["num_tokens"]:
-                    num_tokens = num_tokens_from_messages(st.session_state.chat_messages, model=model_name)
-                    info_num_tokens = f"use tokens: {num_tokens}"
-                    st.info(info_num_tokens)
+                    try:
+                        num_tokens = num_tokens_from_messages(st.session_state.chat_messages, model=model_name)
+                        info_num_tokens = f"use tokens: {num_tokens}"
+                        st.info(info_num_tokens)
+                    except Exception as e:
+                        print(e)
                 # 生成当前对话耗时
                 if config_defalut["completions"]["use_time"]:
                     st.info(f"Use time: {round(end_time - start_time,2)}s")

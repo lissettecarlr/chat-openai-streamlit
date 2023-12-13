@@ -6,3 +6,4 @@ completions :
   stream : True
   num_tokens : True
   use_time : True
+  system_prompt : "You are a hellpful assistant."
