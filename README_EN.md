@@ -34,6 +34,6 @@ The following screenshots may not be the latest. You can see the latest examples
 ## 4. Configuration File
 
 The default parameter configuration file is located at `src/config/default.yaml`. Here are the custom parameters explained:
-* models: The models displayed in the dropdown menu on the homepage
+* models: The models displayed in the dropdown menu on the chat page
 * num_tokens: Whether to display the number of tokens consumed after each conversation
 * use_time: Whether to display the time taken after each conversation
