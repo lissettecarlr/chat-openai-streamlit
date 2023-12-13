@@ -1,6 +1,6 @@
 from openai import OpenAI
 import streamlit as st
-import yaml
+import json
 import time
 import tiktoken
 import os,sys
@@ -14,12 +14,11 @@ if 'base_url' not in st.session_state:
 if 'api_key' not in st.session_state:
     st.session_state['api_key'] = ""
 
-
 # 加载默认配置文件
 src_path = os.path.dirname(os.path.realpath(sys.argv[0]))
-with open(os.path.join(src_path, 'config/default.yaml'), 'r') as f:
-    config_defalut = yaml.safe_load(f)
-
+with open(os.path.join(src_path, 'config/default.json'), 'r',encoding='utf-8') as f:
+        config_defalut = json.load(f)
+ 
 
 @st.cache_resource
 def get_openai_client(url, api_key):
@@ -36,11 +35,15 @@ def import_config_file(file):
     '''
     if file is not None:
         content = file.read()
-        config = yaml.safe_load(content)
-        if 'base_url' in config:
-            st.session_state.base_url= config['base_url']
-        if 'api_key' in config:
-            st.session_state.api_key = config['api_key']
+        # config = yaml.safe_load(content)
+        try:
+            # 解析JSON数据
+            json_data = json.loads(content)
+            st.success("load config success")
+        except Exception as e:
+            st.error("load config error:{}".format(e))
+        st.session_state.base_url = json_data.get("base_url")
+        st.session_state.api_key = json_data.get("api_key")
 
 def num_tokens_from_messages(messages, model="gpt-3.5-turbo-0613"):
     """
@@ -84,7 +87,7 @@ def num_tokens_from_messages(messages, model="gpt-3.5-turbo-0613"):
 
 
 # 在侧边栏添加一个文件上传器
-uploaded_file = st.sidebar.file_uploader("uploaded config", type="yaml")
+uploaded_file = st.sidebar.file_uploader("uploaded config", type="json")
 # 如果文件上传成功，则调用import_config_file函数
 if uploaded_file is not None:
     import_config_file(uploaded_file)
@@ -100,10 +103,10 @@ model_name = st.selectbox('Models', st.session_state.model_list, key='chat_model
 system_prompt = st.text_input('System Prompt (Please click the button "clear history" after modification.)' ,config_defalut["completions"]["system_prompt"], key='system_prompt')
 
 if not st.checkbox('default param',True):
-    max_tokens = st.number_input('Max Tokens', 1, 200000, 512, key='max_tokens')
-    temperature = st.slider('Temperature', 0.0, 1.0,  0.7, key='temperature')
-    top_p = st.slider('Top P', 0.0, 1.0, 1.0, key='top_p')
-    stream = st.checkbox('Stream', True, key='stream')
+    max_tokens = st.number_input('Max Tokens', 1, 200000, config_defalut["completions"]["max_tokens"], key='max_tokens')
+    temperature = st.slider('Temperature', 0.0, 1.0,  config_defalut["completions"]["temperature"], key='temperature')
+    top_p = st.slider('Top P', 0.0, 1.0, config_defalut["completions"]["top_p"], key='top_p')
+    stream = st.checkbox('Stream', config_defalut["completions"]["stream"], key='stream')
 else:
     max_tokens = config_defalut["completions"]["max_tokens"]
     temperature = config_defalut["completions"]["temperature"]

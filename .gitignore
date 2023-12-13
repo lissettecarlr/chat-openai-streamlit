@@ -160,5 +160,5 @@ cython_debug/
 #.idea/
 
 # 自定义
-config.yaml
-config_qw.yaml
+config.json
+config_qw.json
