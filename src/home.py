@@ -38,15 +38,15 @@ def home():
             After filling in the parameters in the sidebar, please select a page to use. This application will demonstrate various functions by calling the OpenAI API.\n
             
             ### chat page\n
-            该页面用于文本对话，对应openai文档：[text-generation](https://platform.openai.com/docs/guides/text-generation)
+            该页面用于文本对话，对应openai文档：[text-generation](https://platform.openai.com/docs/guides/text-generation)\n
             This page is used for text conversations, corresponding to the OpenAI documentation: [text-generation](https://platform.openai.com/docs/guides/text-generation)\n
             
             ### vision page\n
-            该页面用于图像理解，对应openai文档：[vision](https://platform.openai.com/docs/guides/vision)
+            该页面用于图像理解，对应openai文档：[vision](https://platform.openai.com/docs/guides/vision)\n
             This page is used for image understanding, corresponding to the OpenAI documentation: [vision](https://platform.openai.com/docs/guides/vision)\n
             
             ### drawing page\n
-            该页面用于图像生成，对应openai文档：[image-generation](https://platform.openai.com/docs/guides/images?context=node)
+            该页面用于图像生成，对应openai文档：[image-generation](https://platform.openai.com/docs/guides/images?context=node)\n
             This page is used for Image generation
             """
 
