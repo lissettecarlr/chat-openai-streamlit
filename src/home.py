@@ -24,7 +24,7 @@ def home():
     st.session_state['api_key'] = ""
 
     #通过上传配置的方式导入base_url和api_key
-    uploaded_file = st.sidebar.file_uploader("uploaded config", type="json",label_visibility="collapsed")
+    uploaded_file = st.sidebar.file_uploader("uploaded config", type="json")
     if uploaded_file is not None:
         import_config_file(uploaded_file)
 
@@ -44,7 +44,12 @@ def home():
             ### vision page\n
             该页面用于图像理解，对应openai文档：[vision](https://platform.openai.com/docs/guides/vision)
             This page is used for image understanding, corresponding to the OpenAI documentation: [vision](https://platform.openai.com/docs/guides/vision)\n
+            
+            ### drawing page\n
+            该页面用于图像生成，对应openai文档：[image-generation](https://platform.openai.com/docs/guides/images?context=node)
+            This page is used for Image generation
             """
+
         )
 if __name__ == "__main__":
     home()
