@@ -5,6 +5,8 @@ An interactive web application based on streamlit that supports various language
 
 - [x] Support the Chat Completions API page for text conversations
 - [x] Support the Vision page for image understanding
+- [x] A page that supports Image generation for generating images
+- [x] Assistants page
 
 Other added features
 

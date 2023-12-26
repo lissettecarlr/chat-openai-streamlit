@@ -48,6 +48,10 @@ def home():
             ### drawing page\n
             该页面用于图像生成，对应openai文档：[image-generation](https://platform.openai.com/docs/guides/images?context=node)\n
             This page is used for Image generation
+            
+            ### assistants\n
+            该页面用于能够使用openai的assistant功能，对应openai文档：[assistants](https://platform.openai.com/docs/assistants/overview)\n
+            This page is used for assistant
             """
 
         )

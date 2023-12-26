@@ -6,7 +6,7 @@
 - [x] 支持Chat Completions API 的页面，进行文本对话
 - [x] 支持Vision的页面，进行图像理解
 - [x] 支持Image generation的页面，进行图片生成
-- [ ] Assistants的页面，进行助理对话
+- [x] Assistants的页面，进行助理对话
 
 其他添加的小功能
 
