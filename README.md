@@ -1,5 +1,6 @@
 # chat-openai-streamlit
-基于streamlit编写，支持openai接口的各类语音模型的交互web应用
+
+基于streamlit编写的针对openai接口的各类模型对话web应用，目前支持基本对话、文生图、图片理解、assistants
 
 ## 0. 目标
 

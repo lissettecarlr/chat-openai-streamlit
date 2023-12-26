@@ -1,5 +1,5 @@
 # chat-openai-streamlit
-An interactive web application based on streamlit that supports various language models with openai interface.
+Web application for various models' dialogue based on the OpenAI API, written in Streamlit,assistants
 
 ## 0. Objective
 
