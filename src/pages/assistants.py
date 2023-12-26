@@ -104,14 +104,16 @@ def assistant_page():
         file = client.files.create(file=uploaded_file, purpose="assistants")
         st.session_state.file_id = file.id
     
+    def load_assistant(assistant_id):
+        st.session_state.assistant = client.beta.assistants.retrieve(assistant_id)
+        st.session_state.thread = client.beta.threads.create()
+        st.success("assistant loaded successfully!")
 
     # 加载assistant
     st.session_state.assistant_id = st.text_input("assistant id", st.session_state.assistant_id)
     col1, col2 ,col3 =  st.columns(3)
     if col1.button("load assistant"):
-        st.session_state.assistant = client.beta.assistants.retrieve(st.session_state.assistant_id)
-        st.session_state.thread = client.beta.threads.create()
-        st.success("assistant loaded successfully!")
+        load_assistant(st.session_state.assistant_id)
 
     if col2.button("delete assistant"):
         if(st.session_state.assistant_id == "" or st.session_state.assistant is None):
@@ -123,7 +125,11 @@ def assistant_page():
             st.session_state.thread = None
             st.session_state.assistants_messages = []
             st.success("assistant deleted successfully!")
-    col3.write("now assistant id: {}".format(st.session_state.assistant_id))
+    if st.session_state.assistant is not None:
+        text_status_assistant =  r"assistant : {}".format(st.session_state.assistant.name)   
+    else:
+        text_status_assistant =  r"assistant : None"    
+    col3.write(text_status_assistant)
 
     def create_file_link(file_name, file_id):
         content = client.files.content(file_id)
