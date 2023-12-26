@@ -37,6 +37,15 @@ def home():
             请在填写完侧边栏参数后，选择页面进行使用。本应用将调用openai接口的方式来演示各项功能\n
             After filling in the parameters in the sidebar, please select a page to use. This application will demonstrate various functions by calling the OpenAI API.\n
             
+            可以使用导入json的方式传入参数，格式如下：\n
+            Parameters can be passed using the import JSON method, with the following format: \n
+            ```json
+            {
+                "base_url" : "https://xxx",
+                "api_key" : "sk-xxxx" 
+            }
+            ```
+
             ### chat page\n
             该页面用于文本对话，对应openai文档：[text-generation](https://platform.openai.com/docs/guides/text-generation)\n
             This page is used for text conversations, corresponding to the OpenAI documentation: [text-generation](https://platform.openai.com/docs/guides/text-generation)\n
