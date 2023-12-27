@@ -25,16 +25,18 @@
 - [x] chat页面每次对话后显示消耗的token数（配置文件中控制开关）
 - [x] 对whisper的输出添加过滤。（当这模型输入是没有内容的音频时，会输出一些字幕广告）
 
-## 1. 安装依赖
+## 1 使用
+
+### 直接运行
 
 ```bash
 pip install -r requirements.txt
+streamlit run ./src/chat.py --server.port 1234
 ```
 
-## 2. 运行
-
+### docker
 ```bash
-streamlit run ./src/chat.py --server.port 1234
+sudo docker run -d -p 10000:10000 --name openai-web lissettecarlr/openai-web-streamlit:v0.1
 ```
 
 ## 3. 效果图
