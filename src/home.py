@@ -58,7 +58,6 @@ def home():
                 
                 ### 3 🖼️drawing page \n
                 该页面用于图像生成，使用DALL·E模型，输入提示词，输出图片。对应openai文档：[image-generation](https://platform.openai.com/docs/guides/images?context=node)\n
-                This page is used for Image generation
                 
                 ### 4 🤖assistants\n
                 该页面用于能够使用openai的assistant功能，能使用工具代码解释器和文档检索。对应openai文档：[assistants](https://platform.openai.com/docs/assistants/overview)\n

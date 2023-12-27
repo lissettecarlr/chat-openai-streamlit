@@ -16,13 +16,26 @@ def get_openai_client(url, api_key):
 def assistant_page():
     st.title("assistant")
     #st.caption("https://platform.openai.com/docs/assistants/overview")
-    st.markdown(
-        """
-        * 1. 通过侧边栏创建assistant将获得的ID填入下方,或者直接到openai后台创建.
-        * 2. 填入ID后点击load assistant,等待提示assistant loaded successfully
-        * 3. 开始对话吧
-        """
-    )
+    option = st.radio("change language:", ("En", "Zh"),horizontal=True,index=1)
+    if option == "Zh":
+        st.markdown(
+            """
+            * 1 通过侧边栏创建assistant将获得的ID填入下方,或者直接到[openai后台](https://platform.openai.com/assistants)创建.
+            * 2 填入ID后点击load assistant,等待提示assistant loaded successfully
+            * 3 开始对话吧
+            """
+        )
+    else:
+        st.markdown(
+            """
+            * 1 Create an assistant through the sidebar and fill in the obtained ID below, or create one directly on the OpenAI platform.
+            * 2 After entering the ID, click "Load Assistant" and wait for the prompt "Assistant loaded successfully."
+            * 3 Start the conversation.
+            """
+        )
+
+
+
     # 初始化参数
     api_key = (
         st.session_state.api_key
