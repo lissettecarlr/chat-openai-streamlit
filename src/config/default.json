@@ -8,5 +8,8 @@
       "num_tokens": true,
       "use_time": true,
       "system_prompt": "You are a hellpful assistant."
+  },
+  "stt" :{
+    "language" : ["zh","en","ja"]
   }
 }

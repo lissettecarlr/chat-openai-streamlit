@@ -41,10 +41,8 @@ def assistant_page():
 
     if "run" not in st.session_state:
         st.session_state.run = {"status": None}
-
     if "assistants_messages" not in st.session_state:
         st.session_state.assistants_messages = []
-
     if "assistant_id" not in st.session_state:
         st.session_state.assistant_id = ""
     if "assistant" not in st.session_state:
@@ -83,7 +81,7 @@ def assistant_page():
         st.sidebar.write(assistant.id)
         st.sidebar.write("-------------------")
         
-
+    # 实际支持文件 见：https://platform.openai.com/docs/assistants/tools/supported-files
     uploaded_file = st.sidebar.file_uploader(
         "Upload a file",
         type=[

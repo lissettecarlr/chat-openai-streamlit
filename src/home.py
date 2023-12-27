@@ -61,7 +61,13 @@ def home():
             ### assistants\n
             该页面用于能够使用openai的assistant功能，对应openai文档：[assistants](https://platform.openai.com/docs/assistants/overview)\n
             This page is used for assistant
+
+            ### speech to text\n
+            该页面用于语音转文本，对应openai文档：[speech-to-text](https://platform.openai.com/docs/guides/speech-to-text)\n
+            turn audio into text
             """
+
+            
 
         )
 if __name__ == "__main__":
