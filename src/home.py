@@ -17,11 +17,14 @@ def import_config_file(file):
         st.session_state.api_key = json_data.get("api_key")
 
 def home():
-    st.title("openai playground")
+    st.title("🏠openai playground")
     st.caption("Please fill in the parameters in the sidebar before using, or import the parameters by uploading a file.")
 
-    st.session_state['base_url'] = "https://api.openai.com/v1"
-    st.session_state['api_key'] = ""
+    if "base_url" not in st.session_state:
+        st.session_state['base_url'] = "https://api.openai.com/v1"
+    
+    if "api_key" not in st.session_state:
+        st.session_state['api_key'] = ""
 
     #通过上传配置的方式导入base_url和api_key
     uploaded_file = st.sidebar.file_uploader("uploaded config", type="json")
@@ -32,43 +35,67 @@ def home():
     st.session_state.base_url = st.sidebar.text_input('Base URL', st.session_state.base_url)
     st.session_state.api_key =  st.sidebar.text_input('API Key',st.session_state.api_key, type='password')
 
-    st.markdown(
-            """
-            请在填写完侧边栏参数后，选择页面进行使用。本应用将调用openai接口的方式来演示各项功能\n
-            After filling in the parameters in the sidebar, please select a page to use. This application will demonstrate various functions by calling the OpenAI API.\n
+    option = st.radio("change language:", ("En", "Zh"),horizontal=True,index=1)
+    if option == "Zh":
+        st.markdown(
+                """
+                首先：
+                * 请在侧边栏填写`API Key`，如果没有请在[openai官网](https://platform.openai.com/account/api-keys)获取，如果需要使用代理，请修改`base_url`\n
+                * 也可以通过导入json文件自动填充，格式如下：\n
+                    ```json
+                    {
+                        "base_url" : "https://xxx",
+                        "api_key" : "sk-xxxx" 
+                    }
+                    ```
+                * 接下来在侧边栏选择需要使用的页面。
+                ---------------------------------------------------------
+                ### 1 💬chat page  \n
+                该页面用于文本对话，选择模型，输入问题，得到回答。对应openai文档：[text-generation](https://platform.openai.com/docs/guides/text-generation)\n
+                
+                ### 2 🎞️vision page \n
+                该页面用于图像理解，使用gpt-4-vision-preview模型，输入图片和问题，得到回答。对应openai文档：[vision](https://platform.openai.com/docs/guides/vision)\n
+                
+                ### 3 🖼️drawing page \n
+                该页面用于图像生成，使用DALL·E模型，输入提示词，输出图片。对应openai文档：[image-generation](https://platform.openai.com/docs/guides/images?context=node)\n
+                This page is used for Image generation
+                
+                ### 4 🤖assistants\n
+                该页面用于能够使用openai的assistant功能，能使用工具代码解释器和文档检索。对应openai文档：[assistants](https://platform.openai.com/docs/assistants/overview)\n
             
-            可以使用导入json的方式传入参数，格式如下：\n
-            Parameters can be passed using the import JSON method, with the following format: \n
+                ### 5 🗣️speech to text\n
+                该页面用于语音转文本，使用whisper模型。对应openai文档：[speech-to-text](https://platform.openai.com/docs/guides/speech-to-text)\n
+                """
+            )
+    elif option == "En":
+            st.markdown(
+            """
+            First:
+            * Please fill in the `API Key` in the sidebar. If you don't have one, you can obtain it from the [OpenAI website](https://platform.openai.com/account/api-keys). If you need to use a proxy, please modify the `base_url`.
+            * You can also automatically populate the fields by importing a JSON file with the following format:
             ```json
             {
                 "base_url" : "https://xxx",
                 "api_key" : "sk-xxxx" 
             }
             ```
+            * Next, select the desired page from the sidebar.
+            ---------------------------------------------------------
+            ### 1 💬chat page
+            This page is used for text-based conversations. Select a model, input a question, and get a response. Corresponds to the OpenAI documentation: [text-generation](https://platform.openai.com/docs/guides/text-generation)
 
-            ### chat page\n
-            该页面用于文本对话，对应openai文档：[text-generation](https://platform.openai.com/docs/guides/text-generation)\n
-            This page is used for text conversations, corresponding to the OpenAI documentation: [text-generation](https://platform.openai.com/docs/guides/text-generation)\n
-            
-            ### vision page\n
-            该页面用于图像理解，对应openai文档：[vision](https://platform.openai.com/docs/guides/vision)\n
-            This page is used for image understanding, corresponding to the OpenAI documentation: [vision](https://platform.openai.com/docs/guides/vision)\n
-            
-            ### drawing page\n
-            该页面用于图像生成，对应openai文档：[image-generation](https://platform.openai.com/docs/guides/images?context=node)\n
-            This page is used for Image generation
-            
-            ### assistants\n
-            该页面用于能够使用openai的assistant功能，对应openai文档：[assistants](https://platform.openai.com/docs/assistants/overview)\n
-            This page is used for assistant
+            ### 2 🎞️vision page
+            This page is used for image understanding. It utilizes the gpt-4-vision-preview model. Input an image and a question, and get a response. Corresponds to the OpenAI documentation: [vision](https://platform.openai.com/docs/guides/vision)
 
-            ### speech to text\n
-            该页面用于语音转文本，对应openai文档：[speech-to-text](https://platform.openai.com/docs/guides/speech-to-text)\n
-            turn audio into text
+            ### 3 🖼️drawing page
+            This page is used for image generation. It utilizes the DALL·E model. Input prompts and generate images. Corresponds to the OpenAI documentation: [image-generation](https://platform.openai.com/docs/guides/images?context=node)
+
+            ### 4 🤖assistants
+            This page allows you to use OpenAI's assistant functionality, including the tool code interpreter and document retrieval. Corresponds to the OpenAI documentation: [assistants](https://platform.openai.com/docs/assistants/overview)
+
+            ### 5 🗣️speech to text
+            This page is used for speech-to-text conversion. It utilizes the whisper model. Corresponds to the OpenAI documentation: [speech-to-text](https://platform.openai.com/docs/guides/speech-to-text)
             """
-
-            
-
         )
 if __name__ == "__main__":
     home()
