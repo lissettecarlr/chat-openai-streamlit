@@ -17,8 +17,8 @@ Web application for various models' dialogue based on the OpenAI API, written in
 - [x] Support the Vision page for image understanding
 - [x] A page that supports Image generation for generating images
 - [x] Assistants page
-- [ ] Support the page for language to text
-- [ ] Support the page for text to speech
+- [x] Support the page for language to text
+- [x] Support the page for text to speech
 
 Other added features
 

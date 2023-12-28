@@ -39,7 +39,8 @@ def home():
     if option == "Zh":
         st.markdown(
                 """
-                首先：
+                **在这里你可以体验到openai提供的所有功能**
+                ## 使用说明
                 * 请在侧边栏填写`API Key`，如果没有请在[openai官网](https://platform.openai.com/account/api-keys)获取，如果需要使用代理，请修改`base_url`\n
                 * 也可以通过导入json文件自动填充，格式如下：\n
                     ```json
@@ -64,12 +65,16 @@ def home():
             
                 ### 5 🗣️speech to text\n
                 该页面用于语音转文本，使用whisper模型。对应openai文档：[speech-to-text](https://platform.openai.com/docs/guides/speech-to-text)\n
+                
+                ### 6 📢text to speech\n
+                该页面用于文本转语音，使用tts模型。对应openai文档：[text-to-speech](https://platform.openai.com/docs/guides/text-to-speech)\n
                 """
             )
     elif option == "En":
             st.markdown(
             """
-            First:
+            **Here you can experience all the capabilities provided by OpenAI.**
+            ## Instructions for use
             * Please fill in the `API Key` in the sidebar. If you don't have one, you can obtain it from the [OpenAI website](https://platform.openai.com/account/api-keys). If you need to use a proxy, please modify the `base_url`.
             * You can also automatically populate the fields by importing a JSON file with the following format:
             ```json
@@ -94,6 +99,9 @@ def home():
 
             ### 5 🗣️speech to text
             This page is used for speech-to-text conversion. It utilizes the whisper model. Corresponds to the OpenAI documentation: [speech-to-text](https://platform.openai.com/docs/guides/speech-to-text)
+
+            ### 6 📢text to speech
+            This page is used for text-to-speech conversion. It utilizes the tts model. Corresponds to the OpenAI documentation: [text-to-speech](https://platform.openai.com/docs/guides/text-to-speech)
             """
         )
 if __name__ == "__main__":
