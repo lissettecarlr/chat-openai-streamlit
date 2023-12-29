@@ -24,6 +24,7 @@
 - [x] chat页面每次对话后显示耗时（配置文件中控制开关）
 - [x] chat页面每次对话后显示消耗的token数（配置文件中控制开关）
 - [x] 对whisper的输出添加过滤。（当这模型输入是没有内容的音频时，会输出一些字幕广告）
+- [x] 给chat页面增加了预设提示词，可以在配置文件中自定义
 
 ## 1 使用
 
@@ -36,7 +37,7 @@ streamlit run ./src/chat.py --server.port 1234
 
 ### docker
 ```bash
-sudo docker run -d -p 10000:10000 --name openai-web lissettecarlr/openai-web-streamlit:v0.1
+sudo docker run -d -p 10000:10000 --name openai-web lissettecarlr/openai-web-streamlit:v0.2
 ```
 
 ## 3. 效果图

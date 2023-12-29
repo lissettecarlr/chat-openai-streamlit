@@ -75,10 +75,27 @@ def chat_page():
     with open(os.path.join(src_path, 'config/default.json'), 'r',encoding='utf-8') as f:
         config_defalut = json.load(f)
 
+    # if "system_prompt" not in st.session_state:
+    #     st.session_state.system_prompt = config_defalut["completions"]["system_prompt"]
+ 
     # 显示配置项
     st.session_state['model_list'] = config_defalut["completions"]["models"]
     model_name = st.selectbox('Models', st.session_state.model_list, key='chat_model_name')
-    system_prompt = st.text_input('System Prompt (Please click the button "clear history" after modification.)' ,config_defalut["completions"]["system_prompt"], key='system_prompt')
+
+    option = st.radio("system_prompt", ("Manual input", "prompts"),horizontal=True,index=0)
+    if option == "Manual input":
+        system_prompt = st.text_input('System Prompt (Please click the button "clear history" after modification.)' ,config_defalut["completions"]["system_prompt"])
+    else:
+        # 加载预设提示词
+        with open(os.path.join(src_path, 'config/prompt.json'), 'r',encoding='utf-8') as f:
+            masks = json.load(f)
+        masks_zh = [item['name'] for item in masks['zh']]
+        masks_zh_name = st.selectbox('prompts', masks_zh)
+        for item in masks['zh']:
+            if item['name'] == masks_zh_name:
+                system_prompt = item['context']
+                break
+    
 
     if not st.checkbox('default param',True):
         max_tokens = st.number_input('Max Tokens', 1, 200000, config_defalut["completions"]["max_tokens"], key='max_tokens')
@@ -101,7 +118,6 @@ def chat_page():
     for msg in st.session_state.chat_messages:
         with st.chat_message(msg['role']):
             st.markdown(msg['content'])
-
 
     if prompt := st.chat_input():
         try:
