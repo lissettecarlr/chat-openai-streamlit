@@ -52,11 +52,14 @@ def drawing_page():
                     #print(response)
                     for image in response.data:
                         image_url = image.url
+                        revised_prompt = image.revised_prompt
                         st.image(image_url, caption=prompt, width=200)
 
                         # 添加下载链接
                         download_link = f'<a href="{image_url}" download>Download</a>'
                         st.markdown(download_link, unsafe_allow_html=True)
+                        # 显示提示词
+                        st.write("revised_prompt : "+ revised_prompt)
                 except Exception as e:
                     st.error(e)
                     st.stop()
