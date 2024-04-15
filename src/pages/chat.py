@@ -158,8 +158,8 @@ def chat_page():
                         model_msg = streaming_text
                     else:
                         model_msg = response.choices[0].message.content
-                        with st.chat_message('assistant'):
-                            st.markdown(model_msg)
+                        #with st.chat_message('assistant'):
+                        st.markdown(model_msg)
                     end_time = time.time()
                     temp_chat_messages.append({"role": "assistant", "content": model_msg})
                     st.session_state.chat_messages = temp_chat_messages        

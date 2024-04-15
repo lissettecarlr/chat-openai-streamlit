@@ -33,7 +33,7 @@
 
 ```bash
 pip install -r requirements.txt
-streamlit run ./src/chat.py --server.port 1234
+streamlit run ./src/home.py --server.port 1234
 ```
 
 ### docker

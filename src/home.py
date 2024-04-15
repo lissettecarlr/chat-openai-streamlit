@@ -51,9 +51,13 @@ def home():
                     ```
                 * 接下来在侧边栏选择需要使用的页面。
                 ---------------------------------------------------------
+                """
+        )
+        st.markdown(
+                """
                 ### 1 💬chat page  \n
                 该页面用于文本对话，选择模型，输入问题，得到回答。对应openai文档：[text-generation](https://platform.openai.com/docs/guides/text-generation)\n
-                
+
                 ### 2 🎞️vision page \n
                 该页面用于图像理解，使用gpt-4-vision-preview模型，输入图片和问题，得到回答。对应openai文档：[vision](https://platform.openai.com/docs/guides/vision)\n
                 
