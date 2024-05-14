@@ -79,7 +79,7 @@ def vision_page():
                                     ],
                                 },
                             ],
-                            "max_tokens": 300,
+                            "max_tokens": 5000,
                         }
                     else:
                         payload = {
