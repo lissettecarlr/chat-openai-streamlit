@@ -22,8 +22,14 @@ Web application for various models' dialogue based on the OpenAI API, written in
 
 Other added features
 
-- [x] Display the time taken after each conversation on the chat page (controlled by the configuration file)
-- [x] Display the number of tokens consumed after each conversation on the chat page (controlled by the configuration file)
+ - [x] Display the elapsed time after each conversation on the chat page (controlled by a switch in the configuration file).
+ - [x] Display the number of tokens consumed after each conversation on the chat page (controlled by a switch in the configuration file).
+ - [x] Add filtering to the output of Whisper. (When the model is given audio with no content, it outputs some subtitle advertisements.)
+ - [x] Added preset prompt phrases to the chat page, which can be customized in the configuration file.
+ - [x] Added the display of revised_prompt on the draw page, which saves the modified results of your prompt.
+
+Update
+2024-05-14 gpt-4o conversation interface
 
 ## 1. Installation
 
