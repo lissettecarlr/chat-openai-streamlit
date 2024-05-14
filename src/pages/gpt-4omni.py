@@ -44,6 +44,9 @@ def vision_page():
     upload_images = st.file_uploader("Upload an image", type=["png", "jpg", "jpeg"],label_visibility="collapsed")
     MAX_FILE_SIZE = 5 * 1024 * 1024  # 5MB
 
+    # 输入数字
+    max_tokens = st.number_input("Max tokens", min_value=1, value=300, step=1)
+
     bytes_data = None
     if upload_images is not None:
         if upload_images.size > MAX_FILE_SIZE:
@@ -79,7 +82,7 @@ def vision_page():
                                     ],
                                 },
                             ],
-                            "max_tokens": 5000,
+                            "max_tokens": max_tokens,
                         }
                     else:
                         payload = {
@@ -90,8 +93,9 @@ def vision_page():
                                     "content": prompt,
                                 },
                             ],
-                            "max_tokens": 300,
+                            "max_tokens": max_tokens,
                         }
+                        
                     if base_url.endswith('/'):
                         base_url = base_url[:-1]
                     response = requests.post(
